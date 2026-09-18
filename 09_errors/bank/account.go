@@ -10,7 +10,7 @@ type Konto struct {
 // unzureichend - недостатній
 // das Guthaben - баланс
 // der Fehler - помилка
-//die UnyureichendesGuthabenFehler - помилка недостатнього балансу
+//die UnzureichendesGuthabenFehler - помилка недостатнього балансу
 type UnzureichendesGuthabenFehler struct {
 	Guthaben float64
 	Betrag   float64
