@@ -4,16 +4,17 @@ import (
 	"fmt"
 )
 
-// das Konto — обліковий запис / банківський рахунок
+// das Konto — банківський рахунок
 type Konto struct {
-	Guthaben float64 // das Guthaben — баланс / кошти
+	Guthaben float64 // das Guthaben — баланс
 }
 
 // die Einzahlung — поповнення рахунку
+// der Betrag — сума
 func (k *Konto) GeldEinzahlen(betrag float64) error {
-	// der Betrag — сума
 	if betrag <= 0 {
-		return fmt.Errorf("der Betrag muss größer als 0 sein")
+		// der Fehler — помилка
+		return fmt.Errorf("der Betrag muss groesser als 0 sein")
 	}
 	k.Guthaben += betrag
 	return nil
@@ -22,28 +23,31 @@ func (k *Konto) GeldEinzahlen(betrag float64) error {
 // die Abhebung — зняття коштів
 func (k *Konto) GeldAbheben(betrag float64) error {
 	if betrag <= 0 {
-		return fmt.Errorf("der Betrag muss größer als 0 sein")
+		return fmt.Errorf("der Betrag muss groesser als 0 sein")
 	}
 	if betrag > k.Guthaben {
-		return fmt.Errorf("nicht genug Geld auf dem Konto, um %.2f Geld abzuziehen", betrag)
+		// nicht genug Geld — недостатньо коштів
+		return fmt.Errorf("nicht genug Geld auf dem Konto, um %.2f abzuziehen", betrag)
 	}
 	k.Guthaben -= betrag
 	return nil
 }
 
 func main() {
-	meinBank := Konto{
-		Guthaben: 100.0,
+	// das Konto — банківський рахунок
+	meinKonto := Konto{
+		Guthaben: 100.0, // das Guthaben — баланс
 	}
 
-	// Поповнення
-	if err := meinBank.GeldEinzahlen(50.0); err != nil {
+	// die Einzahlung — поповнення
+	if err := meinKonto.GeldEinzahlen(50.0); err != nil {
+		// der Fehler — помилка
 		fmt.Println("Fehler bei der Einzahlung:", err)
 	}
-	fmt.Printf("Mein Guthaben ist %.2f Geld\n", meinBank.Guthaben)
+	fmt.Printf("Aktuelles Guthaben: %.2f EUR\n", meinKonto.Guthaben) // aktuell — поточний
 
-	// Спроба зняти більше, ніж є на рахунку
-	err := meinBank.GeldAbheben(200.0)
+	// die Abhebung — зняття
+	err := meinKonto.GeldAbheben(200.0)
 	if err != nil {
 		fmt.Println(err)
 	}
