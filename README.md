@@ -54,7 +54,6 @@ This repository contains a step-by-step practical course for learning Go (Golang
 - **Language**: Go (Golang)
 - **VCS**: Git & GitHub
 
-  ### Статистика репозиторію
 
-![GitHub Stats](https://vercel.app)
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Landfrei&show_icons=true&theme=tokyonight&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
 
