@@ -53,3 +53,9 @@ This repository contains a step-by-step practical course for learning Go (Golang
 ## 🛠 Tech Stack
 - **Language**: Go (Golang)
 - **VCS**: Git & GitHub
+
+  ### Статистика репозиторію
+
+[![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Landfrei&show_icons=true&theme=tokyonight&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)
+
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Landfrei&layout=compact&theme=tokyonight&hide_border=true)](https://github.com/anuraghazra/github-readme-stats)В
