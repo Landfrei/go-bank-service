@@ -4,13 +4,14 @@ import (
 	"fmt"
 )
 
-// das Guthaneb = баланс
-// das Konto = обліковий запис
+// das Konto — банківський рахунок
+// das Guthaben — баланс
 type Konto struct {
 	Guthaben int
 }
 
-// die Einzahlung = поповнення грошами
+// die Einzahlung — поповнення рахунку
+// der Betrag — сума
 func (k *Konto) GeldEinzahlen(betrag int) error {
 	if betrag <= 0 {
 		return fmt.Errorf("ungültiger Betrag für eine Einzahlung: %d", betrag)
@@ -19,9 +20,8 @@ func (k *Konto) GeldEinzahlen(betrag int) error {
 	return nil
 }
 
-// ungültig = некоректний
-// der Betrag = сума
-// die Abhebung = зняття грошей
+// die Abhebung — зняття коштів
+// ungültig — некоректний / недійсний
 func (k *Konto) GeldAbheben(betrag int) error {
 	if betrag <= 0 {
 		return fmt.Errorf("ungültiger Betrag für eine Abhebung: %d", betrag)
@@ -33,9 +33,9 @@ func (k *Konto) GeldAbheben(betrag int) error {
 	return nil
 }
 
-// gültig - дійсний, коректний, чинний
-// das Landeskürzel - код країни
-func (k *Konto) IstIBANGueltig(iban string) error {
+// gültig — дійсний / коректний
+// das Landeskürzel — код країни
+func IstIBANGueltig(iban string) error {
 	if len(iban) != 22 {
 		return fmt.Errorf("ungültige IBAN-Länge: %d (muss 22 sein)", len(iban))
 	}
@@ -45,19 +45,19 @@ func (k *Konto) IstIBANGueltig(iban string) error {
 	return nil
 }
 
+// die Fehlerprüfung — перевірка помилок
+func FehlerPruefen(msg string, err error) {
+	if err != nil {
+		fmt.Printf("%s: %v\n", msg, err)
+	}
+}
+
 func main() {
-	meinBank := Konto{
-		Guthaben: 100,
-	}
-	err1 := meinBank.GeldEinzahlen(-50)
-	if err1 != nil {
-		fmt.Println(err1)
-	}
-	fmt.Println("Mein Guthaben ist ", meinBank.Guthaben, "Geld")
-	err2 := meinBank.GeldAbheben(200)
-	if err2 != nil {
-		fmt.Println(err2)
-		return
-	}
-	fmt.Printf("Mein Guthaben ist %d Geld", meinBank.Guthaben)
+	meinKonto := Konto{Guthaben: 100}
+
+	FehlerPruefen("Fehler bei Einzahlung", meinKonto.GeldEinzahlen(-50))
+	FehlerPruefen("Fehler bei Abhebung", meinKonto.GeldAbheben(200))
+	FehlerPruefen("Fehler bei IBAN", IstIBANGueltig("UA1234567890123456789012"))
+
+	fmt.Printf("Mein Guthaben ist %d Geld\n", meinKonto.Guthaben)
 }

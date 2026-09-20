@@ -2,9 +2,9 @@ package main
 
 import "testing"
 
-// die Einzahlung - поповнення, внесення коштів
-// der Betrag - сума
-// das Guthaben - баланс, залишок на рахунку
+// die Einzahlung — поповнення рахунку
+// der Betrag — сума
+// das Guthaben — баланс
 func TestGeldEinzahlen(t *testing.T) {
 	tests := []struct {
 		name          string
@@ -45,10 +45,8 @@ func TestGeldEinzahlen(t *testing.T) {
 	}
 }
 
-// die Abhebung - зняття грошей
-// der Betrag - сума
-// das Guthaben - баланс, залишок на рахунку
-// nicht genug Geld - недостатньо грошей
+// die Abhebung — зняття коштів
+// ungültig — некоректний / недійсний
 func TestGeldAbheben(t *testing.T) {
 	tests := []struct {
 		name          string
@@ -96,15 +94,9 @@ func TestGeldAbheben(t *testing.T) {
 	}
 }
 
-// gültig - дійсний, коректний, чинний
-// ungültig - недійсний, некоректний
-// die Länge - довжина
-// das Landeskürzel - код країни
-// der Fehler - помилка
-// erwarten - очікувати (erwartet - очікується)
+// gültig — дійсний / коректний
+// das Landeskürzel — код країни
 func TestIstIBANGueltig(t *testing.T) {
-	konto := &Konto{}
-
 	tests := []struct {
 		name    string
 		iban    string
@@ -129,7 +121,7 @@ func TestIstIBANGueltig(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			err := konto.IstIBANGueltig(tt.iban)
+			err := IstIBANGueltig(tt.iban)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("IstIBANGueltig() Fehler = %v, erwartet Fehler = %v", err, tt.wantErr)
 			}
